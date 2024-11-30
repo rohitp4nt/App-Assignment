@@ -1,0 +1,206 @@
+import React from 'react';
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  SafeAreaView,
+  TextInput,
+  StyleSheet,
+} from 'react-native';
+import { Home, Search, Plus, Play, Bell } from 'lucide-react-native';
+
+const trendingUsers = [
+  {
+    id: '1',
+    name: 'Elon musk',
+    handle: '@elon_musk',
+    avatar: '/placeholder.svg?height=48&width=48'
+  },
+  {
+    id: '2',
+    name: 'Riyansh agrawal',
+    handle: '@riymodel',
+    avatar: '/placeholder.svg?height=48&width=48'
+  },
+  {
+    id: '3',
+    name: 'Sofia Saffera',
+    handle: '@saffera_',
+    avatar: '/placeholder.svg?height=48&width=48'
+  },
+  {
+    id: '4',
+    name: 'Anna Ranells',
+    handle: '@_anna_ranell',
+    avatar: '/placeholder.svg?height=48&width=48'
+  },
+  {
+    id: '5',
+    name: 'Emilian Alisa',
+    handle: '@emilian_alisa',
+    avatar: '/placeholder.svg?height=48&width=48'
+  },
+  {
+    id: '6',
+    name: 'Bretton Alexander',
+    handle: '@bre_alex',
+    avatar: '/placeholder.svg?height=48&width=48'
+  }
+];
+
+const hashtags = ['#millionairelifestyles', '#samaltman', '#openai'];
+
+export default function TrendingFeed() {
+  return (
+    <SafeAreaView style={styles.container}>
+      {/* Search Bar */}
+      <View style={styles.searchContainer}>
+        <Search color="#666" size={20} style={styles.searchIcon} />
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search"
+          placeholderTextColor="#666"
+        />
+      </View>
+
+      {/* Hashtags */}
+      <ScrollView 
+        horizontal 
+        showsHorizontalScrollIndicator={false}
+        style={styles.hashtagsContainer}
+      >
+        {hashtags.map((hashtag) => (
+          <TouchableOpacity key={hashtag} style={styles.hashtagButton}>
+            <Text style={styles.hashtagText}>{hashtag}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+
+      {/* Trending Section */}
+      <Text style={styles.trendingTitle}>Trending</Text>
+
+      {/* Trending Users */}
+      <ScrollView style={styles.userList}>
+        {trendingUsers.map((user) => (
+          <TouchableOpacity key={user.id} style={styles.userItem}>
+            <Image 
+              source={{ uri: user.avatar }}
+              style={styles.avatar}
+            />
+            <View style={styles.userInfo}>
+              <Text style={styles.userName}>{user.name}</Text>
+              <Text style={styles.userHandle}>{user.handle}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+
+      {/* Bottom Navigation */}
+      <View style={styles.bottomNav}>
+        <TouchableOpacity style={styles.navItem}>
+          <Home color="#666" size={24} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+          <Search color="#666" size={24} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+          <Plus color="#666" size={24} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+          <Play color="#666" size={24} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+          <Bell color="#666" size={24} />
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 16,
+    padding: 8,
+    backgroundColor: '#F0F2F5',
+    borderRadius: 8,
+  },
+  searchIcon: {
+    marginHorizontal: 8,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 16,
+    color: '#000',
+  },
+  hashtagsContainer: {
+    paddingHorizontal: 16,
+    marginBottom: 16,
+  },
+  hashtagButton: {
+    backgroundColor: '#F0F2F5',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 16,
+    marginRight: 8,
+  },
+  hashtagText: {
+    color: '#666',
+    fontSize: 14,
+  },
+  trendingTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginHorizontal: 16,
+    marginBottom: 16,
+  },
+  userList: {
+    flex: 1,
+  },
+  userItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#E5E7EB',
+  },
+  avatar: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    marginRight: 12,
+  },
+  userInfo: {
+    flex: 1,
+  },
+  userName: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#000',
+  },
+  userHandle: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 2,
+  },
+  bottomNav: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    padding: 16,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: '#E5E7EB',
+    backgroundColor: '#fff',
+  },
+  navItem: {
+    alignItems: 'center',
+  },
+});
+
